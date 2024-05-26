@@ -1,0 +1,24 @@
+<main class="loja">
+
+{{#each jogos}}
+
+<a href="https://store.steampowered.com/app/{{id_jogos}}" target="_blank">
+    <div>
+        <img src="{{cover_img}}" alt="">
+        <p class="nome">{{nome}}</p>
+        {{{doPrice preco_jogos desconto}}}
+
+        <p class="avaliacao"><span>{{{starRating avaliacao}}}</span></p>
+    </div>
+</a>
+
+{{/each}}
+{{!-- <a href="https://store.steampowered.com/app/319510/Five_Nights_at_Freddys" target="_blank">
+    <div>
+        <img src="https://i.pinimg.com/originals/cb/11/8e/cb118ed754d1a4b8cb9eb97961231d88.jpg" alt="">
+        <p class="nome">Mineirinho Classic (Miner Ultra Adventures)</p>
+        <p class="preco_atual">10,99</p>
+        <p class="avaliacao"><span><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></span></p>
+    </div>
+</a>
+</main> --}}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epic Gomes</title>
+    <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+    {{#if has_v}}
+    <link rel="stylesheet" href="/css/menu_vertical.css">
+    {{/if}}
+    <link rel="stylesheet" href="/css/checkbox.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Russo+One&display=swap');
+    </style>
+</head>
+<body>
+    <nav>
+    {{>menu_h}}
+    {{#if has_v}}
+    {{>menu_v}}
+    <script src="/js/menu_v_js.js"></script>
+    {{/if}}
+    </nav>
+    {{{body}}}
+</body>
+</html>

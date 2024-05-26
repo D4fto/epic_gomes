@@ -1,0 +1,42 @@
+
+<input type="checkbox" id="menu_v_chec" class="invisivel">
+<div style="position: fixed; height: 50px; width: 50px; background-color: var(--color1); right:0; top:0; z-index: 1;"></div>
+<label for="menu_v_chec" id="menu_v_label"><i class="bi bi-list"></i></label>
+<form action="/loja" method="get">
+<ul class="menu menu_v">
+    
+    <li>
+        <input type="text" name="search_game" id="search_game" placeholder="search...">
+    </li>
+    <li><input type="submit" value="Aplicar filtros"></li>
+    <li>
+        <input type="checkbox" name="chec_price" id="price" class="invisivel filtros" checked>
+        <label for="price" class="filtro_tipo_label naoselecionavel">
+            <div>Filtrar por preço</div>
+        </label>
+        <div class="filtro_container" id="price_container">
+            <div class="caixa_filtros">
+                <ul>
+                    <li class="preco" style="order: -2;"><div class="range_preco"><form><input class="naoselecionavel" type="range" name="preco" id="preco" min="0" max="130" step="10"oninput="x.value=preco.value" value="130"><br><p id="preco_output">Por até <output name="x" for="preco"></output>,00 R$</p><p id="qualquer">Qualquer preço</p><p id="gratis">Gratuito</p></form></div></li>
+                    <label for="specials"><li><div class="checkbox naoselecionavel"><input class="price_filtro filtro" type="checkbox" name="spc_offer" id="specials"><label for="specials">Ofertas especiais</label></div></li></label>
+                    <label for="hidef2p"><li><div class="checkbox naoselecionavel"><input class="price_filtro filtro" type="checkbox" name="hidef2p" id="hidef2p"><label for="hidef2p">Ocultar gratuitos</label></div></li></label>
+                </ul>
+            </div>
+        </div>
+    </li>
+    {{#each filtrosTipos}}
+    
+    <li>
+        <input type="checkbox" name="chec_{{tipo_nome}}" id="{{tipo_nome}}" class="invisivel filtros">
+        <label for="{{tipo_nome}}" class="filtro_tipo_label naoselecionavel"><div>Filtrar por {{tipo_nome}}</div></label>
+        <div class="filtro_container" id="{{tipo_nome}}_container" style="grid-template-rows: 1fr;">
+            <div class="caixa_filtros">
+                <ul>
+                    {{{gerarFiltros ../filtros id_filtro_tipo tipo_nome}}}
+                </ul>
+            </div>
+        </div>
+    </li>
+    {{/each}}
+</ul>
+</form>
