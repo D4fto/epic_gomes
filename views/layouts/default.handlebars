@@ -17,12 +17,15 @@
 </head>
 <body>
     <nav>
-    {{>menu_h}}
+    {{>_menu_h}}
     {{#if has_v}}
-    {{>menu_v}}
+    {{>_menu_v}}
     <script src="/js/menu_v_js.js"></script>
     {{/if}}
     </nav>
+    <main>
+        {{>_msg}}
     {{{body}}}
+    </main>
 </body>
 </html>

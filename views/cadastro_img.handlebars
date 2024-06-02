@@ -1,0 +1,31 @@
+
+<style>
+    div.menu{
+        display: none;
+    }
+    main{
+        transform: translateY(var(--menu_h_height));
+    }
+</style>
+{{#if erros}}
+<div class="alert alert_error">
+{{#each erros}}
+{{this}}<br>
+{{else}}
+{{/each}}
+{{/if}}
+</div>
+<form action="/finalizar_cadastro" method="post" class="formulario" enctype="multipart/form-data">
+    <div >
+        <h3>Está quase pronto!</h3>
+        <div>
+            <p>Imagem do usuario:</p>
+            <input type="file" name="file" id="file" accept="image/png, image/jpg, image/jpeg">
+        </div>
+        <div>
+            <input type="submit" value="Finalizar cadastro">
+        </div>
+    </div>
+</form>
+
+

@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="/css/conta.css">
+<style>
+    div.menu{
+        display: none;
+    }
+    main{
+        transform: translateY(var(--menu_h_height));
+    }
+    p{
+        overflow-wrap: break-word;
+    }
+</style>
+<div class="conta">
+    <div class="lateral">
+    <form action="/changephoto" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" accept="image/*" class="invisivel" required>
+        <label for="file">
+            <img src="{{imgs_local}}{{user.dataValues.usuario_imagem}}" alt="imagem do usuario" class="circle_img" id="user_img">
+            <span>Alterar imagem</span>
+            <br>
+            <input type="submit" value="Alterar imagem" class="submit_botao">
+        </label>
+    </form>
+    </div>
+    <div class="principal">
+        <div>
+            <form action="/changeuser" method="post">
+                <h1><input type="text" name="name" id="name" oninput="resizeInput()" value="{{user.dataValues.nome_usuario}}"> <label for="submit_user"><i class="bi bi-pencil-fill"></i></label></h1>
+                <h1 id="width-measure"></h1>
+                <input type="submit" value="" id="submit_user" class="invisivel">
+            </form>
+            <p>Membro desde: <input type="date" id="date" value="{{user.dataValues.createdAt}}" style="pointer-events: none; text-align: center;"></p>
+            <form action="/changedate" method="post">
+                <p>Data de nascimento: <input type="date" name="data" id="date" class="active" value="{{user.dataValues.data_nascimento}}"><label for="submit_date"><i class="bi bi-pencil-fill"></i></label></p>
+                <input type="submit" value="" id="submit_date" class="invisivel">
+                
+            </form>
+            <form action="/changepassword" method="post">
+                <input type="submit" value="Alterar senha" class="submit_botao">
+            </form>
+            <form action="/logout" method="get">
+                <input type="submit" value="Sair da conta" class="submit_botao submit_alert">
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function resizeInput() {
+        const input = document.getElementById('name');
+        const widthMeasure = document.getElementById('width-measure');
+        
+        widthMeasure.textContent = input.value;
+        
+        input.style.width = widthMeasure.offsetWidth + 'px';
+    }
+    resizeInput()
+</script>
+<script>
+    const avatarImage = document.getElementById('file');
+
+    avatarImage.addEventListener('change', event => {
+      const preview = document.querySelector('#preview-image');
+
+      if (preview) {
+        preview.remove();
+      }
+
+      const reader = new FileReader;
+
+      reader.onload = function(event) {
+        const previewImage = document.getElementById("user_img");
+        previewImage.src = event.target.result;
+      }
+      reader.readAsDataURL(avatarImage.files[0]);
+    })
+</script>
+<script>
+    pdate = document.getElementById('date')
+    console.log(pdate.defaultValue)
+    var dateObj = new Date(pdate.defaultValue)
+    var day = dateObj.getDate()
+    var month = dateObj.getMonth() + 1
+    var year = dateObj.getFullYear()
+    var formattedDate = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day 
+    pdate.defaultValue = formattedDate
+</script>

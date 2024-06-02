@@ -1,0 +1,106 @@
+body{
+    height: calc(100vh - var(--menu_h_height));
+}
+main{
+    height: 100%;
+}
+.conta img{ 
+    width: 400px;
+}
+.conta{
+    font-size: 2em;
+    display: flex;
+    width: var(--100vw);
+    height: 100%;
+    flex-wrap: wrap;
+}
+.conta div{
+    padding: 20px;
+}
+.conta .lateral{
+    text-align: center;
+    flex-grow: 2;
+}
+.conta .principal{
+    flex-grow: 20;
+}
+.conta .principal div{
+    flex-shrink: 2;
+    overflow-wrap: break-word;
+    width: 100%;
+    flex-basis: 500px;
+}
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+input[type="date"]{
+    padding: 0px;
+    font-size: 1em;
+    background: none;
+    border: none;
+    color: unset;
+    outline: none;
+    border-bottom: 2px solid var(--color2);
+}
+input.active{
+    cursor: text;
+}
+h1 label{
+    font-size: .75em;
+    cursor: pointer;
+}
+input[type="date"]~label{
+    position: absolute;
+    font-size: 0.75em;
+    padding: 0px;
+    cursor: pointer;
+    transform: translate(-1em,0.25em);
+}
+label[for="file"] img{
+    cursor: pointer;
+    transition: .5s;
+}
+label[for="file"] img:hover{
+    filter: brightness(0.5) blur(5px);
+    
+}
+label[for="file"] img:hover~span{
+    color: unset;
+    border: 5px solid white;
+}
+label[for="file"] span{
+    text-align: center;
+    transform: translate(-400px);
+    border-radius: 50%;
+    width: 400px;
+    height: 400px;
+    line-height: 400px;
+    transition: .5s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: absolute;
+    color: transparent;
+    pointer-events: none;
+    border: 5px solid transparent;
+}
+input[type="text"]{
+    background: unset;
+    color: unset;
+    font-size: unset;
+    width: unset;
+    font-family: unset;
+    font-weight: unset;
+    border: unset;
+    outline: none;
+    border-bottom: 2px solid var(--color2);
+}
+#width-measure {
+    visibility: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+h1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 5px;
+}

@@ -1,0 +1,28 @@
+<style>
+    div.menu{
+        display: none;
+    }
+    main{
+        transform: translateY(var(--menu_h_height));
+    }
+    p{
+        overflow-wrap: break-word;
+    }
+</style>
+<form action="/login" method="post" class="formulario">
+    <div >
+        <h3>Faça o Login</h3>
+        <div>
+            <input class="input_user" placeholder=" " type="email" name="email" id="user_email" value="{{user_email}}" required>
+            <p class="label_input_user">Email: </p>
+        </div>
+        <div>
+            <input class="input_user" placeholder=" " type="password" name="senha" id="senha" value="{{senha}}" required>
+            <p class="label_input_user">Senha: </p>
+        </div>
+        <div>
+            <input type="submit" value="Fazer login">
+        </div>
+    </div>
+    <p>Novo na Epic Gomes? <a href="/cadastro">clique aqui</a> para fazer seu cadastro.</p>
+</form>

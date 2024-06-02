@@ -13,7 +13,7 @@ const Usuario = db.sequelize.define('usuarios', {
         type: db.DataTypes.DATEONLY
     },
     senha: {
-        type: db.DataTypes.STRING(300)
+        type: db.DataTypes.STRING(150)
     },
     nome_usuario: {
         type: db.DataTypes.STRING(64)
@@ -29,6 +29,10 @@ const Usuario = db.sequelize.define('usuarios', {
         type: db.DataTypes.INTEGER,
         allowNull: false
     }
+}, {
+    timestamps: true,
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
 })
 const Pedidos = require('./Pedidos')
 const Analises = require('./Analises')

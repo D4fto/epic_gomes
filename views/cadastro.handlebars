@@ -1,0 +1,48 @@
+
+<style>
+    div.menu{
+        display: none;
+    }
+    main{
+        transform: translateY(var(--menu_h_height));
+    }
+</style>
+{{#if erros}}
+<div class="alert alert_error">
+{{#each erros}}
+{{this}}<br>
+{{else}}
+{{/each}}
+{{/if}}
+</div>
+<form action="/cadastro" method="post" class="formulario">
+    <div >
+        <h3>Cadastre-se</h3>
+        <div>
+            <input class="input_user" placeholder=" " type="text" name="user_name" value="{{user_name}}" required>
+            <p class="label_input_user">Usuário: </p>
+        </div>
+        <div>
+            <input class="input_user" placeholder=" " type="email" name="email" id="user_email" value="{{user_email}}" required>
+            <p class="label_input_user">Email: </p>
+        </div>
+        <div>
+            <input class="input_user" placeholder=" " type="password" name="senha" id="senha" value="{{senha}}" required oninput="verifica_senha()">
+            <p class="label_input_user">Senha: </p>
+        </div>
+        <div>
+            <input class="input_user" placeholder=" " type="password" name="confirma_senha" id="confirma_senha" value="{{confirma_senha}}" required oninput="verificar_coerencia()">
+            <p class="label_input_user">Confirmar senha: </p>
+        </div>
+        <div id="nascimento">
+            <p>Data de nascimento:</p>
+            <input type="date" name="nascimento" id="nascimento" value="{{nascimento}}" required>
+        </div>
+        
+        <div>
+            <input type="submit" value="Continuar cadastro">
+        </div>
+    </div>
+    <p>Já tem uma conta? <a href="/login">Faça login</a></p>
+</form>
+<script src="/js/confirma_senha.js"></script>

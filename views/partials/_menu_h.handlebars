@@ -1,0 +1,21 @@
+<ul class="menu menu_h"> 
+    {{#each menu_horizontal}}
+    {{#if ativo}}
+    <li><a class="active naoselecionavel">{{nome}}</a></li>
+    {{else}}
+    <li><a href="{{rota}}">{{nome}}</a></li>
+    {{/if}}
+    {{/each}}
+</ul>
+<div class="menu">
+    <a href="/home">
+        <h1 class="russo-one-regular titulo">
+        <i class="bi bi-pen-fill"></i>
+        Epic Gomes</h1>
+    </a>
+    {{#if user}}
+    <a href="/conta"><img src="{{imgs_local}}{{user.dataValues.usuario_imagem}}" alt="imagem do usuario" class="circle_img"></a>
+    {{else}}
+    <a href="/login"><img src="{{imgs_local}}user.png" alt="usuario anonimo imagem" class="circle_img"></a>
+    {{/if}}
+</div>

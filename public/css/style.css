@@ -6,8 +6,24 @@
     --color5: #003D52;
     --scrollbar-width: 10px;
     --100vw: calc(100vw - var(--scrollbar-width));
+    --menu_h_height: 50px;
+    --titulo_menu_height: 75px;
 }
-
+.alert{
+text-align: center;
+padding: 15px;
+font-size: 2em;
+}
+.alert_error{
+    background-color: #ff0000;
+    color: rgb(255, 255, 255);
+}
+.alert_success{
+    background-color: var(--color4);
+}
+a{
+    color: var(--color3);
+}
 .russo-one-regular {
     font-family: "Russo One", sans-serif;
     font-weight: 400;
@@ -47,14 +63,14 @@ body{
 div.menu{
     display: flex;
     width: var(--100vw);
-    top: 50px;
+    top: var(--menu_h_height);
     background-color: var(--color5);
-    height: 75px;
-    line-height: 75px;
+    height: var(--titulo_menu_height);
+    line-height: var(--titulo_menu_height);
     padding: 0 25px;
 }
 div.menu a{
-    line-height: 75px;
+    line-height: var(--titulo_menu_height);
     text-decoration: none;
     color: unset;
 }
@@ -69,7 +85,6 @@ div.menu img{
     right: 0;
     height: 100%;
     padding: 10px;
-    border-radius: 50%;
     align-items: center;
     transition: 500ms;
 }
@@ -78,8 +93,8 @@ div.menu img:hover{
 }
 ul.menu_h{
     width: var(--100vw);
-    line-height: 50px;
-    height: 50px;
+    line-height: var(--menu_h_height);
+    height: var(--menu_h_height);
     overflow-x: scroll;
     overflow-y: hidden;
 }
@@ -113,16 +128,25 @@ ul.menu a.active{
     display: none;
 }
 main{
-    transform: translatey(125px);
+    transform: translatey(calc(var(--menu_h_height) + var(--titulo_menu_height)));
     width: var(--100vw);
 }
-main.loja div img{
+main .loja{
+    width: 100%;
+    box-sizing: border-box;
+    gap: 15px;
+    padding: 15px 0;
+    justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap;
+}
+main .loja div img{
     width: 100%;
     aspect-ratio: 3 / 4;
     object-fit: cover;
     border-radius: 5px;
 }
-main.loja div{
+main .loja div{
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     width: 300px;
@@ -133,36 +157,36 @@ main.loja div{
     transition: 500ms ease;
     border-radius: 5px;
 }
-main.loja div:hover{
+main .loja div:hover{
     filter: brightness(0.75);
     transform: translateY(-10px);
 }
-main.loja .avaliacao{
+main .loja .avaliacao{
     position: absolute;
     bottom: 0px;
     color: var(--color3);
 }
-main.loja a{
+main .loja a{
     color: unset;
     text-decoration: none;
 }
-main.loja div .nome{
+main .loja div .nome{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 900;
     font-size: 1.25em;
     overflow-wrap: break-word;
 }
 
-main.loja .preco_atual{
+main .loja .preco_atual{
     position: absolute;
     bottom: 21px;
     font-size: 1.15em;
 }
-main.loja .preco_atual span{
+main .loja .preco_atual span{
     background-color: var(--color4);
     padding: 0 5px;
 }
-main.loja .preco_antigo{
+main .loja .preco_antigo{
     position: absolute;
     bottom: 41px;
     font-size: 1em;
@@ -179,4 +203,118 @@ main.loja .preco_antigo{
 }
 ::-webkit-scrollbar-track{
     background-color: var(--color1);
+}
+.formulario{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: var(--100vw);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.75em;
+    height: calc(100vh - var(--menu_h_height));
+}
+.formulario > div{
+    background: var(--color1);
+    padding: 100px;
+    padding-top: 0;
+    border-radius: 50px;
+    margin-bottom: var(--titulo_menu_height);
+    border: 5px solid var(--color2);
+    box-shadow: inset 0px 77px 0px 0px var(--color2);
+}
+
+.formulario h3{
+    padding: 20px;
+    background-color: var(--color2);
+}
+.formulario div:not(:first){
+    width: fit-content;
+}
+.formulario div:not(:first-child){
+    margin-top: 1em;
+}
+.label_input_user{
+    position: absolute;
+    transform: translateY(-1.25em);
+    pointer-events: none;
+    transition: 200ms;
+}
+.formulario input{
+    padding: 5px 0;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--color2);
+    font-size: 1em;
+    color: white;
+    background-color: transparent !important;
+    transition: 500ms;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px var(--color1) inset !important;
+}
+input:-webkit-autofill{
+    -webkit-text-fill-color: rgb(255, 255, 255) !important;
+}
+.input_user:focus + .label_input_user,
+.input_user:not(:placeholder-shown) + .label_input_user{
+    transform: translateY(-4rem);
+    font-size: 0.75em;
+}
+.input_user:not(:valid):not(:placeholder-shown){
+    border-color: #ff0000;
+}
+.formulario input[type='submit'], .formulario input[type='date']{
+    padding: 15px;
+}
+.formulario input[type='submit']:hover{
+    backdrop-filter: brightness(1.5);
+    border-radius: 15px;
+    
+}
+#nascimento input{
+    border: none;
+}
+#nascimento p{
+    background-color: #0086b3;
+    border-radius: 10px 10px 0 0;
+}
+#nascimento{
+    border: 2px solid var(--color2);
+    border-radius: 15px;
+}
+input[type = 'file']{
+    font-size: 0.75em;
+    width: 300px;
+}
+.circle_img{
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+}
+input[type="submit"]{
+    cursor: pointer;
+}
+.submit_botao{
+    margin-bottom: 10px;
+    font-size: .75em;
+    background: none;
+    color: unset;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid var(--color2);
+    transition: .5s;
+}
+.submit_botao:hover{
+    background-color: var(--color2);
+}
+.submit_alert{
+    border: 2px solid red;
+}
+.submit_alert:hover{
+    background-color: red;
 }
