@@ -14,7 +14,7 @@
     <div class="lateral">
     <form action="/changephoto" method="post" enctype="multipart/form-data">
         <input type="file" name="file" id="file" accept="image/*" class="invisivel" required>
-        <label for="file">
+        <label for="file" id="drop-zone">
             <img src="{{imgs_local}}{{user.dataValues.usuario_imagem}}" alt="imagem do usuario" class="circle_img" id="user_img">
             <span>Alterar imagem</span>
             <br>
@@ -57,22 +57,41 @@
 </script>
 <script>
     const avatarImage = document.getElementById('file');
+    const imagePreview = document.getElementById('user_img')
+    const dropZone = document.getElementById('drop-zone');
 
     avatarImage.addEventListener('change', event => {
-      const preview = document.querySelector('#preview-image');
-
-      if (preview) {
-        preview.remove();
-      }
-
-      const reader = new FileReader;
-
-      reader.onload = function(event) {
-        const previewImage = document.getElementById("user_img");
-        previewImage.src = event.target.result;
-      }
-      reader.readAsDataURL(avatarImage.files[0]);
+      handleFiles(avatarImage.files)
     })
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        imagePreview.classList.add('hover')
+    });
+    dropZone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        imagePreview.classList.remove('hover')
+    });
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (e.dataTransfer.files.length) {
+            avatarImage.files = e.dataTransfer.files;
+            handleFiles(avatarImage.files);
+        }
+        imagePreview.classList.remove('hover')
+    });
+    function handleFiles(files) {
+        const file = files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              imagePreview.src = e.target.result
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Por favor, selecione uma imagem.');
+        }
+    }
+    
 </script>
 <script>
     pdate = document.getElementById('date')

@@ -10,13 +10,12 @@
     --titulo_menu_height: 75px;
 }
 .alert{
-text-align: center;
-padding: 15px;
-font-size: 2em;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.5em;
 }
 .alert_error{
     background-color: #ff0000;
-    color: rgb(255, 255, 255);
 }
 .alert_success{
     background-color: var(--color4);
