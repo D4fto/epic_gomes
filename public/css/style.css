@@ -8,7 +8,6 @@
     --100vw: calc(100vw - var(--scrollbar-width));
     --menu_h_height: 50px;
     --titulo_menu_height: 75px;
-    --cor9: red;
 }
 .alert{
     text-align: center;
@@ -36,7 +35,7 @@ a{
 }
 body{
     overflow-y: scroll;
-    background-color: var(--cor9);
+    background-color: var(--color5);
     color: white;
 }
 *{
@@ -128,6 +127,7 @@ ul.menu a.active{
     display: none;
 }
 main{
+    position: relative;
     transform: translatey(calc(var(--menu_h_height) + var(--titulo_menu_height)));
     width: var(--100vw);
 }
@@ -205,7 +205,9 @@ main .loja .preco_antigo{
     background-color: var(--color1);
 }
 .formulario{
-    overflow: hidden;
+    transform: translateY(90px);
+    overflow-x: hidden;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     width: var(--100vw);
@@ -213,16 +215,18 @@ main .loja .preco_antigo{
     justify-content: center;
     align-items: center;
     font-size: 1.75em;
-    height: calc(100vh - var(--menu_h_height));
 }
 .formulario > div{
     background: var(--color1);
     padding: 100px;
     padding-top: 0;
     border-radius: 50px;
-    margin-bottom: var(--titulo_menu_height);
+    margin-bottom: 15px;
     border: 5px solid var(--color2);
     box-shadow: inset 0px 77px 0px 0px var(--color2);
+}
+.formulario > div div{
+    position: relative;
 }
 
 .formulario h3{
@@ -235,9 +239,9 @@ main .loja .preco_antigo{
 .formulario div:not(:first-child){
     margin-top: 1em;
 }
-.label_input_user{
+.label_input_user {
     position: absolute;
-    transform: translateY(-1.25em);
+    top: 0; /* ou bottom: calc(100% - 1.25em); */
     pointer-events: none;
     transition: 200ms;
 }
@@ -262,7 +266,7 @@ input:-webkit-autofill{
 }
 .input_user:focus + .label_input_user,
 .input_user:not(:placeholder-shown) + .label_input_user{
-    transform: translateY(-4rem);
+    top: -1em;
     font-size: 0.75em;
 }
 .input_user:not(:valid):not(:placeholder-shown){
@@ -333,5 +337,32 @@ input[type="submit"]{
     ul.menu a{
         padding: 0px 20px;
     }
+    .formulario{
+        font-size: 1.5em;
+    }
+    .formulario > div{
+        background: var(--color1);
+        padding: 40px;
+        padding-top: 0;
+        border-radius: 25px;
+        box-shadow: inset 0px 50px 0px 0px var(--color2);
+    }
     
+    .formulario h3{
+        padding: 8px;
+        background-color: var(--color2);
+    }
+    .formulario div:not(:first){
+        width: fit-content;
+    }
+    .formulario div:not(:first-child){
+        margin-top: 1.5em;
+    }
+    .formulario input{
+        font-size: .75em;
+    }
+    .formulario div~p{
+        font-size: .8em;
+        max-width: 75vw;
+    }
 }

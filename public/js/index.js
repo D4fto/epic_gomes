@@ -1,5 +1,8 @@
 function isMobileDevice() {
     // Verifica se o tamanho da tela é pequeno (geralmente, dispositivos móveis têm telas menores)
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        return true;
+    }
 
     // Verifica se o agente do usuário contém palavras-chave comuns de dispositivos móveis
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -11,5 +14,5 @@ function isMobileDevice() {
 }
 // Adiciona uma classe ao corpo se for um celular
 if (isMobileDevice()) {
-    document.documentElement.style.setProperty('--cor9', 'blue');
+    document.documentElement.style.setProperty('--100vw', '100vw');
 }
