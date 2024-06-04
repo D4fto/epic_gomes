@@ -198,8 +198,8 @@ const upload = multer({storage});
         if(!req.body.nascimento || typeof req.body.nascimento == undefined || req.body.nascimento == null){
             erros.push('Data de nascimento não inserida')
         }
-        var email = await Usuario.findOne({atributes:['email'],where: {email: req.body.email}})
-        var user = await Usuario.findOne({atributes:['nome_usuario'],where: {nome_usuario: req.body.user_name}})
+        var email = await Usuario.findOne({attributes:['email'],where: {email: req.body.email}})
+        var user = await Usuario.findOne({attributes:['nome_usuario'],where: {nome_usuario: req.body.user_name}})
         if(email!=null){
             erros.push('Email já utilizado')
         }
@@ -297,10 +297,30 @@ const upload = multer({storage});
         }
     })
     app.post('/changephoto', authenticated, upload.single("file"), (req,res)=>{
-        req.flash("success_msg", "Usuário cadastrado com sucesso!")
+        req.flash("success_msg", "Avatar alterado com sucesso!")
         res.redirect('/conta')
     })
     app.post('/changepassword', authenticated, (req,res)=>{
         res.render('change_password',{menu_horizontal: [{nome: 'Home', rota: '/home', ativo: false},{nome: 'Alterar senha', rota: '', ativo: true}]})
     })
-    app.listen(8080);
+    app.post('/fChangePassword', authenticated, async (req,res) =>{
+        let senha = await Usuario.findOne({attributes: ['senha'], where: {email: req.user.email}})
+        if(await argon2.verify(senha.dataValues.senha,req.body.senha_atual)){
+            try{
+                senha = await argon2.hash(req.body.senha)
+                console.log()
+                await Usuario.update({senha: senha},{where: {email: req.user.email}})
+                req.flash("success_msg", "Senha alterada com sucesso")
+                res.redirect('/conta')
+            }
+            catch(error){
+                req.flash("error_msg", "ocorreu um erro interno, desculpe :( "+error)
+                res.redirect(307, '/changepassword')
+            }
+        }
+        else{
+            req.flash("error_msg", "Senha incorreta!")
+            res.redirect(307, '/changepassword')
+        }
+    })
+    app.listen(process.env.PORT || 8080);

@@ -60,7 +60,9 @@ input[type="date"]~label{
 }
 label[for="file"] img{
     cursor: pointer;
+    box-shadow: 0 0 15px 2px black;
     transition: .5s;
+    margin-bottom: 15px;
 }
 label[for="file"] img:hover, label[for="file"] img.hover{
     filter: brightness(0.5) blur(5px);

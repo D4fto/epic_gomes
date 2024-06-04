@@ -13,5 +13,16 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "sequelize": "^6.37.3"
-  }
+  },
+  "name": "epic_gomes",
+  "version": "1.0.0",
+  "main": "2.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
