@@ -92,7 +92,7 @@ const storage = multer.diskStorage({
         cb(null,"public/assets/imgs/")
     },
     filename: function(req, file, cb){
-        arq=file.originalname+Date.now()+path.extname(file.originalname)
+        arq=file.originalname.replaceAll(' ','_')+Date.now()+path.extname(file.originalname)
         cb(null, arq)
         if(!req.user){
             Usuario.update({usuario_imagem: arq},{where: {email: emailtemp}}).then((result) => {
