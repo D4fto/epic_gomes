@@ -323,4 +323,4 @@ const upload = multer({storage});
             res.redirect(307, '/changepassword')
         }
     })
-    app.listen(process.env.PORT || 8080);
+    app.listen(process.env.PORT || 8080); 

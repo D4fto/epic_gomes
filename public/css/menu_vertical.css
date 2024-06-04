@@ -141,13 +141,22 @@ main{
 #menu_v_label{
     display: none;
 }
-@media (max-width:750px) {
+#fundo_menu{
+    position: fixed; 
+    height: var(--menu_h_height); 
+    width: var(--menu_h_height); 
+    background-color: var(--color1); 
+    right:0; 
+    top:0; 
+    z-index: 1;
+}
+@media (max-width:600px) {
     ul.menu_v{
         transform: translate(100%);
         transition: 500ms;
     }
     ul.menu_h{
-        width: calc(var(--100vw) - 50px);
+        width: calc(var(--100vw) - var(--menu_h_height));
     }
     div.menu{
         width: calc(var(--100vw));
@@ -161,8 +170,8 @@ main{
         position: fixed;
         background-color: color-mix(in srgb, var(--color1) , #ffffff00 1%);
         right: 0;
-        line-height: 50px;
-        width: 50px;
+        line-height: var(--menu_h_height);
+        width: var(--menu_h_height);
         text-align: center;
         font-size: 2em;
         color: white;

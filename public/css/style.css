@@ -8,6 +8,7 @@
     --100vw: calc(100vw - var(--scrollbar-width));
     --menu_h_height: 50px;
     --titulo_menu_height: 75px;
+    --cor9: red;
 }
 .alert{
     text-align: center;
@@ -35,7 +36,7 @@ a{
 }
 body{
     overflow-y: scroll;
-    background-color: var(--color5);
+    background-color: var(--cor9);
     color: white;
 }
 *{
@@ -316,4 +317,21 @@ input[type="submit"]{
 }
 .submit_alert:hover{
     background-color: red;
+}
+
+@media only screen and (max-width: 600px) {
+    :root{
+        --100vw: 100vw;
+        --menu_h_height: 45px;
+    }
+    ::-webkit-scrollbar{
+        display: none; 
+    }
+    ul.menu_h{
+        font-size: .75em;
+    }
+    ul.menu a{
+        padding: 0px 20px;
+    }
+    
 }
