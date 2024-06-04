@@ -16,7 +16,7 @@
   },
   "name": "epic_gomes",
   "version": "1.0.0",
-  "main": "2.js",
+  "main": "app.js",
   "devDependencies": {},
   "scripts": {
     "start": "node app.js"
