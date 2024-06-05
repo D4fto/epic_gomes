@@ -13,7 +13,9 @@ const argon2 = require('argon2')
 const passport = require('passport')
 const path = require('path')
 require("./config/auth")(passport)
-const {authenticated} = require("./helpers/authenticated")
+const { authenticated } = require("./helpers/authenticated");
+const { normalizar } = require("./helpers/normalizar");
+const Jogo = require('./models/Jogo');
 var emailtemp
 const SECRET_KEY = process.env.SECRET_KEY;
 const SESSION_SECRET = process.env.SESSION_SECRET;
@@ -79,6 +81,9 @@ const helpers = {
             }
         });
         return filtroshtml
+    },
+    normalizarHandlebars: function(str){
+        return normalizar(str)
     }
 }
 app.engine('handlebars', exphbs.engine({defaultLayout:'default',helpers: helpers}));
@@ -298,7 +303,7 @@ const upload = multer({storage});
     })
     app.post('/changephoto', authenticated, upload.single("file"), (req,res)=>{
         req.flash("success_msg", "Avatar alterado com sucesso!")
-        res.redirect('/conta')
+        res.redirect('/conta') 
     })
     app.post('/changepassword', authenticated, (req,res)=>{
         res.render('change_password',{menu_horizontal: [{nome: 'Home', rota: '/home', ativo: false},{nome: 'Alterar senha', rota: '', ativo: true}]})
@@ -321,6 +326,32 @@ const upload = multer({storage});
         else{
             req.flash("error_msg", "Senha incorreta!")
             res.redirect(307, '/changepassword')
+        }
+    })
+    app.get('/app/:id/:nome', async(req, res)=>{
+        let nome = await Jogo.findOne({attributes:['nome'], where:{id_jogos: req.params.id}})
+        nome = normalizar(nome.dataValues.nome)
+        if(req.params.nome !== nome){
+            res.redirect('/app/'+req.params.id+'/'+nome)
+        }
+        else{
+            let jogo = await Selects.select_all_from_one_jogo(req.params.id)
+            console.log(jogo)
+            if(jogo){
+                res.render('app',{jogo: jogo.dataValues,menu_horizontal: [{nome: 'Home', rota: '/home', ativo: false},{nome: 'Carrinho', rota: '/carrinho', ativo: false},{nome: 'Biblioteca', rota: '/biblioteca', ativo: false}]})
+            }
+            else{
+                res.send('Não existe')
+            }
+        }
+    })
+    app.get('/app/:id', async (req,res)=>{
+        let jogo = await Jogo.findOne({attributes:["id_jogos", 'nome'],where:{id_jogos: req.params.id}})
+        if(jogo){
+            res.redirect('/app/'+req.params.id+'/'+normalizar(jogo.dataValues.nome))
+        }
+        else{
+            res.redirect('/')
         }
     })
     app.listen(process.env.PORT || 8080); 

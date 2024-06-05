@@ -70,7 +70,27 @@ function select_jogos(pesquisa="",preco=-1,filtros=[],hidef2p=false,spc_offers=f
       order: sequelize.Sequelize.literal('score DESC')
     })   
   }
+function select_all_from_one_jogo(id){
+  return Jogo.findOne({
+    attributes: [
+    'id_jogos',
+    'nome',
+    'cover_img',
+    'desconto',
+    'avaliacao',
+    'desenvolvedor',
+    'descricao'],
+    where: {id_jogos: id},
+    include: [
+      {model: PrecoJogo,
+        attributes: ['preco_jogo'],
+        duplicating: false,
+        where: sequelize.Sequelize.literal(`data_preco_jogo = (SELECT MAX(data_preco_jogo) FROM preco_jogos WHERE preco_jogos.jogos_id_jogos = jogos.id_jogos)`)
+      }
+    ]
+  })
+} 
   
-module.exports = { select_jogos }
+module.exports = { select_jogos, select_all_from_one_jogo }
 
 

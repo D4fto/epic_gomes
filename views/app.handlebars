@@ -1,0 +1,12 @@
+<h1>{{jogo.nome}}</h1>
+<img src="{{imgs_local}}{{jogo.cover_img}}" alt="imagem do {{jogo.nome}}">
+{{#if jogo.desconto}}
+<p>{{jogo.desconto}}</p>
+{{/if}}
+{{#each jogo.preco_jogos}}
+<p>{{this.dataValues.preco_jogo}}</p>
+{{/each}}
+<p>{{{starRating jogo.avaliacao}}}</p>
+<p>{{jogo.desenvolvedor}}</p>
+<p>{{jogo.descricao}}</p>
+<br>

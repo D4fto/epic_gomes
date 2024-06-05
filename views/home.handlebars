@@ -3,7 +3,7 @@
 <div class="loja">
     {{#each jogos}}
     
-    <a href="https://store.steampowered.com/app/{{id_jogos}}" target="_blank">
+    <a href="/app/{{id_jogos}}/{{{normalizarHandlebars nome}}}">
         <div>
             <img src="{{../imgs_local}}{{cover_img}}" alt="">
             <p class="nome">{{nome}}</p>
