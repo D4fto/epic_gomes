@@ -354,4 +354,8 @@ const upload = multer({storage});
             res.redirect('/')
         }
     })
+
+    app.use((req,res,next)=>{
+        res.render('404',{has_v:false,menu_horizontal: [{nome: 'Home', rota: '/home', ativo: false},{nome: 'Carrinho', rota: '/carrinho', ativo: false},{nome: 'Biblioteca', rota: '/biblioteca', ativo: false}]})
+    })
     app.listen(process.env.PORT || 8080); 

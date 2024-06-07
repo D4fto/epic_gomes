@@ -1,5 +1,5 @@
 :root{
-    --menu_v_width:250px;
+    --menu_v_width:15.625rem;
 }
 ul.menu_h, div.menu{
     width: calc(var(--100vw) - var(--menu_v_width));
@@ -10,20 +10,20 @@ ul.menu_v{
     top: 0;
     right: 0;
     height: 100vh;
-    padding: 15px var(--scrollbar-width) 15px 0;
+    padding: .9375rem var(--scrollbar-width) .9375rem 0;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem;
     color: white;
     overflow-y: scroll;
     direction: rtl;
     text-align: left;
 }
 ul.menu_v input[type=text]{
-    border-radius: 5px;
+    border-radius: .3125rem;
     width: calc(var(--menu_v_width)*0.9);
     outline: none;
     border: none;
-    padding: 5px;
+    padding: .3125rem;
     font-size: 1.25em;
     background-color: var(--color5);
     color: white;
@@ -35,7 +35,7 @@ ul.menu_v li{
 label.filtro_tipo_label{
     font-size: 1.25em;
     width: calc(var(--menu_v_width)*0.9);
-    padding: 5px 10px;
+    padding: .3125rem .625rem;
     background-color: var(--color5);
     overflow-wrap: break-word;
     cursor: pointer;
@@ -43,7 +43,7 @@ label.filtro_tipo_label{
 .menu_v input[type=submit]{
     font-size: 1.25em;
     width: calc(var(--menu_v_width)*0.9);
-    padding: 5px 10px;
+    padding: .3125rem .625rem;
     background-color: var(--color5);
     text-align: left;
     cursor: pointer;
@@ -55,7 +55,7 @@ label.filtro_tipo_label{
     background-image: linear-gradient(135deg, var(--color2), color-mix(in srgb, var(--color2),rgb(0, 247, 255)));
 }
 .filtro_container{
-    border: 1px solid var(--color5);
+    border: .0625rem solid var(--color5);
     border-top: none;
     display: grid;
     padding: 0;
@@ -68,7 +68,7 @@ label.filtro_tipo_label{
 }
 .filtro_container ul{
     display: grid;
-    max-height: 500px;
+    max-height: 31.25rem;
     overflow-y: scroll;
     direction: ltr;
 }
@@ -86,7 +86,7 @@ label.filtro_tipo_label{
     background-image: linear-gradient(135deg, var(--color2), color-mix(in srgb, var(--color2),rgb(0, 247, 255)));
 }
 .filtro_container label{
-    padding: 5px;
+    padding: .3125rem;
     cursor: pointer;
 }
 
@@ -102,7 +102,7 @@ input[type="range"]{
 
 .range_preco{
     text-align: center;
-    padding: 10px 10px 10px 10px;
+    padding: .625rem .625rem .625rem .625rem;
 }
 input[type="range"]::-webkit-slider-runnable-track{
     -moz-appearance: none;
@@ -110,8 +110,8 @@ input[type="range"]::-webkit-slider-runnable-track{
     -webkit-appearance: none;
     appearance:none;
     background-color: var(--color2);
-    height: 5px;
-    border-radius: 3px;
+    height: .3125rem;
+    border-radius: .1875rem;
     
 }
 input[type="range"]::-webkit-slider-thumb{
@@ -120,9 +120,9 @@ input[type="range"]::-webkit-slider-thumb{
     -webkit-appearance: none;
     appearance:none;
     background: rgb(255, 255, 255);
-    margin: -5px 0 0 0;
-    height: 15px;
-    width: 15px;
+    margin: -0.3125rem 0 0 0;
+    height: .9375rem;
+    width: .9375rem;
     border-radius: 100%;
 }
 input[type="range"]::-webkit-slider-thumb:hover{
@@ -132,7 +132,7 @@ input[type="range"]::-webkit-slider-thumb:hover{
     font-size: 0.75em;
 }
 .range_preco input{ 
-    margin-bottom: 9px;
+    margin-bottom: .5625rem;
 }
 main{
     width: calc(var(--100vw) - var(--menu_v_width));
@@ -150,7 +150,7 @@ main{
     top:0; 
     z-index: 1;
 }
-@media (max-width:600px) {
+@media (max-width:37.5rem) {
     ul.menu_v{
         transform: translate(100%);
         transition: 500ms;
@@ -176,7 +176,7 @@ main{
         font-size: 2em;
         color: white;
         cursor: pointer;
-        border-radius: 15px 0 0 15px;
+        border-radius: .9375rem 0 0 .9375rem;
         transition: 500ms;
     }
     #menu_v_label:hover{

@@ -7,7 +7,7 @@
     display:none;
   }
   .checkbox label {
-    margin-top: -4px;
+    margin-top: -0.25rem;
     cursor: pointer;
     font-size: 0.75em;
     position: relative;
@@ -22,12 +22,12 @@
     height: 0.75em;
     width: 0.75em;
     margin-right: 0.5em;
-    border: 1px solid var(--color5);
+    border: .0625rem solid var(--color5);
     transition: all 0.2s ease;
     position: absolute;
     top: 50%;
     left: 0;
-    border-radius: 2px;
+    border-radius: .125rem;
     transform: translate(0, -50%);
   }
   .checkbox label::after {

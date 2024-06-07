@@ -1,0 +1,38 @@
+<style>
+    main{
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: calc(100vh - var(--menu_h_height));
+        width: var(--100vw);
+        transform: translateY(var(--menu_h_height));
+        position: relative;
+    }
+    div.menu{
+        display: none;
+    }
+    #pen{
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+    .iniciada{
+        position: absolute;
+    }
+    img{
+        aspect-ratio: 5/3;
+        object-position: top;
+        object-fit: cover;
+        width: 25rem;
+        max-width: 75%;
+        border-radius: .9375rem;
+        box-shadow: 0 0 .9375rem black;
+        filter: brightness(0.5);
+    }
+</style>
+<p>Error: 404</p>
+<img src="/assets/imgs/manoel_triste.jpeg" alt="Manoel Gomes triste">
+<h1>Infelizmente não Encontramos essa página</h1>
+<p>pegue essa caneta como pedido de desculpas: </p>
+<i class="bi bi-pen-fill" id="pen"></i>

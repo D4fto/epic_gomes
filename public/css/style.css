@@ -4,14 +4,14 @@
     --color3: #fffb00;
     --color4: #36ad3e;
     --color5: #003D52;
-    --scrollbar-width: 10px;
+    --scrollbar-width: .625rem;
     --100vw: calc(100vw - var(--scrollbar-width));
-    --menu_h_height: 50px;
-    --titulo_menu_height: 75px;
+    --menu_h_height: 3.125rem;
+    --titulo_menu_height: 4.6875rem;
 }
 .alert{
     text-align: center;
-    padding: 15px;
+    padding: .9375rem;
     font-size: 1.5em;
 }
 .alert_error{
@@ -31,7 +31,7 @@ a{
   
 .titulo{
     font-size: 2em;
-    text-indent: 25px;
+    text-indent: 1.5625rem;
 }
 body{
     overflow-y: scroll;
@@ -65,27 +65,28 @@ div.menu{
     top: var(--menu_h_height);
     background-color: var(--color5);
     height: var(--titulo_menu_height);
-    line-height: var(--titulo_menu_height);
-    padding: 0 25px;
+    align-items: center;
+    padding: 0 1.5625rem;
+    justify-content: flex-start;
 }
 div.menu a{
-    line-height: var(--titulo_menu_height);
     text-decoration: none;
     color: unset;
+}
+div.menu a:last-child{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
 }
 div.menu i{
     position: absolute;
     font-size: 0.75em;
-    text-indent: 0px;
+    text-indent: 0rem;
     transform: translateX(-1.25em);
 }
 div.menu img{
-    position: absolute;
-    right: 0;
-    height: 100%;
-    padding: 10px;
-    align-items: center;
-    transition: 500ms;
+    height: 80%;
 }
 div.menu img:hover{
     filter: brightness(0.5);
@@ -106,8 +107,8 @@ ul.menu li{
 ul.menu a{
     background-color: inherit;
     line-height: inherit;
-    padding: 0px 50px;
-    border-radius: 20px 20px 0 0;
+    padding: 0rem 3.125rem;
+    border-radius: 1.25rem 1.25rem 0 0;
     transition: 1s;
     height: fit-content;
     color: white;
@@ -134,8 +135,8 @@ main{
 main .loja{
     width: 100%;
     box-sizing: border-box;
-    gap: 15px;
-    padding: 15px 0;
+    gap: .9375rem;
+    padding: .9375rem 0;
     justify-content: space-evenly;
     display: flex;
     flex-wrap: wrap;
@@ -144,26 +145,26 @@ main .loja div img{
     width: 100%;
     aspect-ratio: 3 / 4;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: .3125rem;
 }
 main .loja div{
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    width: 300px;
-    height: 550px;
+    width: 18.75rem;
+    height: 34.375rem;
     background-color: color-mix(in srgb, var(--color5) 75%, #808080 25%);
-    border: 10px solid color-mix(in srgb, var(--color5) 75%, #808080 25%);
+    border: .625rem solid color-mix(in srgb, var(--color5) 75%, #808080 25%);
     filter: brightness(1);
     transition: 500ms ease;
-    border-radius: 5px;
+    border-radius: .3125rem;
 }
 main .loja div:hover{
     filter: brightness(0.75);
-    transform: translateY(-10px);
+    transform: translateY(-0.625rem);
 }
 main .loja .avaliacao{
     position: absolute;
-    bottom: 0px;
+    bottom: 0rem;
     color: var(--color3);
 }
 main .loja a{
@@ -179,16 +180,16 @@ main .loja div .nome{
 
 main .loja .preco_atual{
     position: absolute;
-    bottom: 21px;
+    bottom: 1.3125rem;
     font-size: 1.15em;
 }
 main .loja .preco_atual span{
     background-color: var(--color4);
-    padding: 0 5px;
+    padding: 0 .3125rem;
 }
 main .loja .preco_antigo{
     position: absolute;
-    bottom: 41px;
+    bottom: 2.5625rem;
     font-size: 1em;
     text-decoration: line-through;
     color: var(--color2);
@@ -198,14 +199,14 @@ main .loja .preco_antigo{
 }
 ::-webkit-scrollbar-thumb{
     background: var(--color2);
-    border: 3px solid var(--color1);
-    border-radius: 15px;
+    border: .1875rem solid var(--color1);
+    border-radius: .9375rem;
 }
 ::-webkit-scrollbar-track{
     background-color: var(--color1);
 }
 .formulario{
-    transform: translateY(90px);
+    transform: translateY(5.625rem);
     overflow-x: hidden;
     overflow-y: scroll;
     display: flex;
@@ -218,19 +219,19 @@ main .loja .preco_antigo{
 }
 .formulario > div{
     background: var(--color1);
-    padding: 100px;
+    padding: 6.25rem;
     padding-top: 0;
-    border-radius: 50px;
-    margin-bottom: 15px;
-    border: 5px solid var(--color2);
-    box-shadow: inset 0px 77px 0px 0px var(--color2);
+    border-radius: 3.125rem;
+    margin-bottom: .9375rem;
+    border: .3125rem solid var(--color2);
+    box-shadow: inset 0rem 4.8125rem 0rem 0rem var(--color2);
 }
 .formulario > div div{
     position: relative;
 }
 
 .formulario h3{
-    padding: 20px;
+    padding: 1.25rem;
     background-color: var(--color2);
 }
 .formulario div:not(:first){
@@ -246,10 +247,10 @@ main .loja .preco_antigo{
     transition: 200ms;
 }
 .formulario input{
-    padding: 5px 0;
+    padding: .3125rem 0;
     border: none;
     outline: none;
-    border-bottom: 2px solid var(--color2);
+    border-bottom: .125rem solid var(--color2);
     font-size: 1em;
     color: white;
     background-color: transparent !important;
@@ -259,7 +260,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px var(--color1) inset !important;
+    -webkit-box-shadow: 0 0 0 1.875rem var(--color1) inset !important;
 }
 input:-webkit-autofill{
     -webkit-text-fill-color: rgb(255, 255, 255) !important;
@@ -273,11 +274,11 @@ input:-webkit-autofill{
     border-color: #ff0000;
 }
 .formulario input[type='submit'], .formulario input[type='date']{
-    padding: 15px;
+    padding: .9375rem;
 }
 .formulario input[type='submit']:hover{
     backdrop-filter: brightness(1.5);
-    border-radius: 15px;
+    border-radius: .9375rem;
     
 }
 #nascimento input{
@@ -285,15 +286,15 @@ input:-webkit-autofill{
 }
 #nascimento p{
     background-color: #0086b3;
-    border-radius: 10px 10px 0 0;
+    border-radius: .625rem .625rem 0 0;
 }
 #nascimento{
-    border: 2px solid var(--color2);
-    border-radius: 15px;
+    border: .125rem solid var(--color2);
+    border-radius: .9375rem;
 }
 input[type = 'file']{
     font-size: 0.75em;
-    width: 300px;
+    width: 18.75rem;
 }
 .circle_img{
     aspect-ratio: 1/1;
@@ -304,29 +305,29 @@ input[type="submit"]{
     cursor: pointer;
 }
 .submit_botao{
-    margin-bottom: 10px;
+    margin-bottom: .625rem;
     font-size: .75em;
     background: none;
     color: unset;
-    padding: 10px;
-    border-radius: 10px;
-    border: 2px solid var(--color2);
+    padding: .625rem;
+    border-radius: .625rem;
+    border: .125rem solid var(--color2);
     transition: .5s;
 }
 .submit_botao:hover{
     background-color: var(--color2);
 }
 .submit_alert{
-    border: 2px solid red;
+    border: .125rem solid red;
 }
 .submit_alert:hover{
     background-color: red;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 37.5rem) {
     :root{
         --100vw: 100vw;
-        --menu_h_height: 45px;
+        --menu_h_height: 2.8125rem;
     }
     ::-webkit-scrollbar{
         display: none; 
@@ -335,21 +336,21 @@ input[type="submit"]{
         font-size: .75em;
     }
     ul.menu a{
-        padding: 0px 20px;
+        padding: 0rem 1.25rem;
     }
     .formulario{
         font-size: 1.5em;
     }
     .formulario > div{
         background: var(--color1);
-        padding: 40px;
+        padding: 2.5rem;
         padding-top: 0;
-        border-radius: 25px;
-        box-shadow: inset 0px 50px 0px 0px var(--color2);
+        border-radius: 1.5625rem;
+        box-shadow: inset 0rem 3.125rem 0rem 0rem var(--color2);
     }
     
     .formulario h3{
-        padding: 8px;
+        padding: .5rem;
         background-color: var(--color2);
     }
     .formulario div:not(:first){
