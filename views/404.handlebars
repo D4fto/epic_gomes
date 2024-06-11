@@ -70,18 +70,22 @@
     <p>pegue essa caneta como pedido de desculpas: </p>
 </div>
 <div class="invisivel naoselecionavel" id="estatisticas">
-    <p>pontuação: <span id="pontuacao"></span></p>
+    <h1>pontuação: <span id="pontuacao"></span></h1>
     <p>recorde atual: <span id="recorde"></span></p>
     <p>recorde global: <span id="global">0</span></p>
+    <p>Precisão: <span id="count">100</span>%</p>
     <form action="" method="post"></form>
 </div>
 <div id="parabens" class="invisivel naoselecionavel">
+    {{!-- <button>LeaderBoard</button>
+    <button>Cadastrar Score</button>
+    <br> --}}
     <img src="/assets/imgs/manoel_feliz.jpeg" alt="Manoel Gomes feliz">
     <h1>Parabéns você pegou <span></span> canetas</h1>
     <p>pegue essa caneta para recomeçar o jogo: </p>
 
 </div>
-<p id="tempo" class="invisivel naoselecionavel"></p>
+<h1 id="tempo" class="invisivel naoselecionavel"></h1>
 <i class="bi bi-pen-fill naoselecionavel" id="pen" onclick="App.pegar()"></i>
 <script>
     let App = {};
@@ -91,14 +95,21 @@
         const estatisticas = document.getElementById('estatisticas')
         const tempo = document.getElementById('tempo')
         const parabens = document.getElementById('parabens')
+        const conta = document.getElementById('count')
         var pontos = 0
         var recorde = 0
         var restante = 30
+        var clicks = 0
+        document.addEventListener('click',()=>{
+            if(pen.classList.contains("playing")){
+                clicks+=1
+                conta.innerHTML=(pontos/clicks*100).toFixed(2)
+            }
+        })
         App.pegar=function(){
             if(!pen.classList.contains("playing")){
                 if(!parabens.classList.contains("invisivel")){
                     parabens.classList.add("invisivel")
-
                 }
                 tempo.innerText=restante
                 restante=30
@@ -117,6 +128,7 @@
                         parabens.classList.remove("invisivel")
                         parabens.querySelector("span").innerText=pontos
                         pontos=0
+                        clicks = 0
                         clearInterval(intervalo)
                     }
                 },1000)
@@ -128,11 +140,11 @@
                 estatisticas.querySelector("#recorde").innerText=recorde
             }
             estatisticas.querySelector("#pontuacao").innerText = pontos
-            pen.style.top=Math.floor(Math.random() * 90)+"%"
-            pen.style.left=Math.floor(Math.random() * 90)+"%"
+            pen.style.top=Math.floor(Math.random() * (90 - 10) + 10)+"%"
+            pen.style.left=Math.floor(Math.random() * (90 - 10) + 10)+"%"
             if (isMobileDevice()) {
-                pen.style.top=Math.floor(Math.random() * 80)+"%"
-                pen.style.left=Math.floor(Math.random() * 80)+"%"
+                pen.style.top=Math.floor(Math.random() * (80 - 10) + 10)+"%"
+                pen.style.left=Math.floor(Math.random() * (80 - 10) + 10)+"%"
             }
             pen.style.color="rgb("+Math.floor(Math.random() * 256)+","+Math.floor(Math.random() * 256)+",0)"
         }
