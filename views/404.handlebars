@@ -93,7 +93,7 @@
         const parabens = document.getElementById('parabens')
         var pontos = 0
         var recorde = 0
-        var restante = 20
+        var restante = 30
         App.pegar=function(){
             if(!pen.classList.contains("playing")){
                 if(!parabens.classList.contains("invisivel")){
@@ -101,7 +101,7 @@
 
                 }
                 tempo.innerText=restante
-                restante=20
+                restante=30
                 msg.style.display='none'
                 pen.classList.add('playing')
                 pen.style.position="absolute"
@@ -130,6 +130,10 @@
             estatisticas.querySelector("#pontuacao").innerText = pontos
             pen.style.top=Math.floor(Math.random() * 90)+"%"
             pen.style.left=Math.floor(Math.random() * 90)+"%"
+            if (isMobileDevice()) {
+                pen.style.top=Math.floor(Math.random() * 80)+"%"
+                pen.style.left=Math.floor(Math.random() * 80)+"%"
+            }
             pen.style.color="rgb("+Math.floor(Math.random() * 256)+","+Math.floor(Math.random() * 256)+",0)"
         }
     })()
