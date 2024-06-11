@@ -63,26 +63,26 @@
         pointer-events: none;
     }
 </style>
-<div id="msg">
+<div id="msg" class="naoselecionavel">
     <p>Error: 404</p>
     <img src="/assets/imgs/manoel_triste.jpeg" alt="Manoel Gomes triste">
     <h1>Infelizmente não Encontramos essa página</h1>
     <p>pegue essa caneta como pedido de desculpas: </p>
 </div>
-<div class="invisivel" id="estatisticas">
+<div class="invisivel naoselecionavel" id="estatisticas">
     <p>pontuação: <span id="pontuacao"></span></p>
     <p>recorde atual: <span id="recorde"></span></p>
     <p>recorde global: <span id="global">0</span></p>
     <form action="" method="post"></form>
 </div>
-<div id="parabens" class="invisivel">
+<div id="parabens" class="invisivel naoselecionavel">
     <img src="/assets/imgs/manoel_feliz.jpeg" alt="Manoel Gomes feliz">
     <h1>Parabéns você pegou <span></span> canetas</h1>
     <p>pegue essa caneta para recomeçar o jogo: </p>
 
 </div>
-<p id="tempo" class="invisivel"></p>
-<i class="bi bi-pen-fill" id="pen" onclick="App.pegar()"></i>
+<p id="tempo" class="invisivel naoselecionavel"></p>
+<i class="bi bi-pen-fill naoselecionavel" id="pen" onclick="App.pegar()"></i>
 <script>
     let App = {};
     (function(){
