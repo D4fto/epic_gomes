@@ -1,5 +1,9 @@
 <style>
+    body{
+        overflow: hidden;
+    }
     main{
+        overflow: hidden;
         font-size: 1.5rem;
         display: flex;
         align-items: center;
@@ -10,12 +14,18 @@
         transform: translateY(var(--menu_h_height));
         position: relative;
     }
+    main div{
+        text-align: center;
+    }
     div.menu{
         display: none;
     }
     #pen{
         font-size: 1.5em;
         cursor: pointer;
+    }
+    #pen:hover{
+        filter: brightness(0.75);
     }
     .iniciada{
         position: absolute;
@@ -28,11 +38,97 @@
         max-width: 75%;
         border-radius: .9375rem;
         box-shadow: 0 0 .9375rem black;
+        
+    }
+    #msg img{
         filter: brightness(0.5);
     }
+    #pen.playing{
+        animation: inverte 1s infinite alternate-reverse linear;
+    }
+    #estatisticas{
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: left;
+        padding: 5px;
+    }
+    #tempo{
+        position: absolute;
+        top: 0;
+        right: 0;
+        text-align: right;
+        padding: 5px;
+    }
 </style>
-<p>Error: 404</p>
-<img src="/assets/imgs/manoel_triste.jpeg" alt="Manoel Gomes triste">
-<h1>Infelizmente não Encontramos essa página</h1>
-<p>pegue essa caneta como pedido de desculpas: </p>
-<i class="bi bi-pen-fill" id="pen"></i>
+<div id="msg">
+    <p>Error: 404</p>
+    <img src="/assets/imgs/manoel_triste.jpeg" alt="Manoel Gomes triste">
+    <h1>Infelizmente não Encontramos essa página</h1>
+    <p>pegue essa caneta como pedido de desculpas: </p>
+</div>
+<div class="invisivel" id="estatisticas">
+    <p>pontuação: <span id="pontuacao"></span></p>
+    <p>recorde atual: <span id="recorde"></span></p>
+    <p>recorde global: <span id="global">0</span></p>
+    <form action="" method="post"></form>
+</div>
+<div id="parabens" class="invisivel">
+    <img src="/assets/imgs/manoel_feliz.jpeg" alt="Manoel Gomes feliz">
+    <h1>Parabéns você pegou <span></span> canetas</h1>
+    <p>pegue essa caneta para recomeçar o jogo: </p>
+
+</div>
+<p id="tempo" class="invisivel"></p>
+<i class="bi bi-pen-fill" id="pen" onclick="App.pegar()"></i>
+<script>
+    let App = {};
+    (function(){
+        const pen = document.getElementById('pen')
+        const msg = document.getElementById('msg')
+        const estatisticas = document.getElementById('estatisticas')
+        const tempo = document.getElementById('tempo')
+        const parabens = document.getElementById('parabens')
+        var pontos = 0
+        var recorde = 0
+        var restante = 20
+        App.pegar=function(){
+            if(!pen.classList.contains("playing")){
+                if(!parabens.classList.contains("invisivel")){
+                    parabens.classList.add("invisivel")
+
+                }
+                tempo.innerText=restante
+                restante=20
+                msg.style.display='none'
+                pen.classList.add('playing')
+                pen.style.position="absolute"
+                estatisticas.classList.remove('invisivel')
+                tempo.classList.remove('invisivel')
+                var intervalo = setInterval(()=>{
+                    restante-=1
+                    tempo.innerText=restante
+                    if(restante==0){
+                        pen.classList.remove('playing')
+                        pen.style.position="unset"
+                        pen.style.color="unset"
+                        parabens.classList.remove("invisivel")
+                        parabens.querySelector("span").innerText=pontos
+                        pontos=0
+                        clearInterval(intervalo)
+                    }
+                },1000)
+            }
+            console.log(pen.style.top)
+            pontos+=1
+            if(pontos>recorde){
+                recorde=pontos
+                estatisticas.querySelector("#recorde").innerText=recorde
+            }
+            estatisticas.querySelector("#pontuacao").innerText = pontos
+            pen.style.top=Math.floor(Math.random() * 95)+"%"
+            pen.style.left=Math.floor(Math.random() * 98)+"%"
+            pen.style.color="rgb("+Math.floor(Math.random() * 256)+","+Math.floor(Math.random() * 256)+",0)"
+        }
+    })()
+</script>

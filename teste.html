@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flexbox Example</title>
+<style>
+    body {
+        margin: 0;
+    }
+    main {
+        background-color: #00d9ff;
+        display: flex;
+        justify-content: center; /* Centraliza o contêiner .loja horizontalmente */
+        margin: auto; /* Centraliza o main na página */
+    }
+    main .loja {
+        display: flex;
+        justify-content: space-between; /* Distribui uniformemente o espaço entre os itens */
+        gap: .9375rem;
+        padding: .9375rem;
+        background-color: #ff0000;
+        box-sizing: border-box; /* Inclui padding e border na largura total */
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .item {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        border: 1px solid blue;
+    }
+    @media (min-width: 900px) {
+        .loja .item:last-child {
+            margin-left: auto; /* Alinha o último item à esquerda apenas em telas largas */
+        }
+    }
+</style>
+</head>
+<body>
+  <main>
+    <div class="loja">
+      <div class="item">Item 1</div>
+      <div class="item">Item 2</div>
+      <div class="item">Item 3</div>
+      <div class="item">Item 4</div>
+      <div class="item">Item 5</div>
+      <div class="item">Item 6</div>
+      <div class="item">Item 7</div>
+      <div class="item">Item 8</div>
+      <div class="item">Item 9</div>
+      <div class="item">Item 10</div>
+      <div class="item">Item 11</div>
+      <div class="item">Item 12</div>
+      <div class="item">Item 13</div>
+      <div class="item">Item 14</div>
+      <div class="item">Item 15</div>
+      <div class="item">Item 16</div>
+      <div class="item">Item 17</div>
+      <div class="item">Item 18</div>
+    </div>
+  </main>
+</body>
+</html>
+
