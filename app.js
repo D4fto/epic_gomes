@@ -21,6 +21,7 @@ const Erro_404 = require('./models/Erro_404')
 var emailtemp
 const SECRET_KEY = process.env.SECRET_KEY;
 const SESSION_SECRET = process.env.SESSION_SECRET;
+
 //flash
 app.use(session({
     secret: SESSION_SECRET,
@@ -398,7 +399,13 @@ const upload = multer({storage});
         })
         res.json({record: record})
     })
-    app.use((req,res,next)=>{
-        res.render('404',{has_v:false,menu_horizontal: [{nome: 'Home', rota: '/home', ativo: false},{nome: 'Carrinho', rota: '/carrinho', ativo: false},{nome: 'Biblioteca', rota: '/biblioteca', ativo: false}]})
+    app.use(async (req,res,next)=>{
+        const record = await Erro_404.findAll({
+            order: db.sequelize.literal('pontos DESC, precisao DESC'),
+            limit: 1,
+            raw: true,
+            distinct: true
+        })
+        res.render('404',{has_v:false,global: record[0].pontos,menu_horizontal: [{nome: 'Home', rota: '/home', ativo: false},{nome: 'Carrinho', rota: '/carrinho', ativo: false},{nome: 'Biblioteca', rota: '/biblioteca', ativo: false}]})
     })
     app.listen(process.env.PORT || 8080); 

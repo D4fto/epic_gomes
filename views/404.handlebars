@@ -172,7 +172,7 @@
 <div class="invisivel naoselecionavel" id="estatisticas">
     <h1>pontuação: <span id="pontuacao"></span></h1>
     <p>recorde atual: <span id="recorde"></span></p>
-    <p>recorde global: <span id="global">0</span></p>
+    <p>recorde global: <span id="global">{{global}}</span></p>
     <p>Precisão: <span id="count">100</span>%</p>
     <form action="" method="post"></form>
 </div>
@@ -226,11 +226,15 @@
         const formScore = document.getElementById('formScore')
         const body = document.querySelector('body')
         const leaderBoard = document.getElementById('leaderBoard')
+        const global = document.getElementById('global')
         let podendo = true
         var pontos = 0
         var recorde = 0
         var restante = 30
         var clicks = 0
+        
+        
+        
         document.addEventListener('click',()=>{
             if(pen.classList.contains("playing")){
                 clicks+=1
@@ -290,7 +294,6 @@
             
         }
         App.leaderboard = ()=>{
-            //leaderBoard.classList.remove('invisivel')
             fetch('/leaderboard', {
                 method: 'Post',
                 headers: {
@@ -311,6 +314,7 @@
                 leaderBoard.classList.remove("invisivel")
                 
                 leaderBoard.querySelector("tbody").innerHTML=""
+                global.innerText=data.record[0].pontos
                 data.record.forEach((element, index)=>{
                     leaderBoard.querySelector("tbody").insertAdjacentHTML('beforeEnd','<tr><td>'+(index+1)+'.</td><td>'+element.nome+'</td><td>'+element.pontos+'</td><td>'+element.precisao+'%</td></tr>')
                 })
@@ -318,7 +322,7 @@
             .catch(error => {
                 console.error('Houve um problema com a requisição:', error);
             });
-        }
+        };
         App.sairleader = ()=>{
             leaderBoard.classList.add('invisivel')
         }
