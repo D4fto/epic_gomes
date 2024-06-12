@@ -1,4 +1,5 @@
 const express = require('express');
+const db = require('./models/db');
 const app = express();
 const exphbs = require('express-handlebars');
 const multer = require('multer');
@@ -16,6 +17,7 @@ require("./config/auth")(passport)
 const { authenticated } = require("./helpers/authenticated");
 const { normalizar } = require("./helpers/normalizar");
 const Jogo = require('./models/Jogo');
+const Erro_404 = require('./models/Erro_404')
 var emailtemp
 const SECRET_KEY = process.env.SECRET_KEY;
 const SESSION_SECRET = process.env.SESSION_SECRET;
@@ -354,7 +356,48 @@ const upload = multer({storage});
             res.redirect('/')
         }
     })
-
+    app.post('/cadatroScore', async(req,res)=>{
+        let x = 1
+        if(req.body.celular){
+            x=2
+        }
+        else{
+            x=1
+        }
+        try{
+            await Erro_404.create({
+                nome: req.body.nome,
+                pontos: req.body.pontos,
+                precisao: req.body.precisao,
+                pontos_tipo_id_pontos_tipo: x
+            })
+            res.send("Deu bom")
+        }
+        catch(err){
+            console.log(err)
+            res.send("Erro: "+err)
+        }
+        
+    })
+    app.post('/leaderboard',async(req,res)=>{
+        let x = 1
+        if(req.body.celular){
+            x=2
+        }
+        else{
+            x=1
+        }
+        const record = await Erro_404.findAll({
+            where: {
+                pontos_tipo_id_pontos_tipo: x
+            },
+            order: db.sequelize.literal('pontos DESC, precisao DESC'),
+            limit: 10,
+            raw: true,
+            distinct: true
+        })
+        res.json({record: record})
+    })
     app.use((req,res,next)=>{
         res.render('404',{has_v:false,menu_horizontal: [{nome: 'Home', rota: '/home', ativo: false},{nome: 'Carrinho', rota: '/carrinho', ativo: false},{nome: 'Biblioteca', rota: '/biblioteca', ativo: false}]})
     })

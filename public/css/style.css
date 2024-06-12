@@ -125,7 +125,7 @@ ul.menu a.active{
     cursor: default;
 }
 .invisivel{
-    display: none;
+    display: none !important;
 }
 main{
     position: relative;

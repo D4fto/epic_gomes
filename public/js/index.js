@@ -16,3 +16,6 @@ function isMobileDevice() {
 if (isMobileDevice()) {
     document.documentElement.style.setProperty('--100vw', '100vw');
 }
+function normalizar(str){
+    return str.replaceAll(' ','_').replaceAll(/[^a-zA-Z0-9_]/g,'')
+}

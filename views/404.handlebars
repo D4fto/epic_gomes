@@ -2,6 +2,9 @@
     body{
         overflow: auto;
     }
+    .escuro{
+        filter: brightness(0.5);
+    }
     main{
         overflow: auto;
         font-size: 1.5rem;
@@ -44,7 +47,7 @@
         filter: brightness(0.5);
     }
     #pen.playing{
-        animation: inverte 1s infinite alternate-reverse linear;
+        animation: inverte 2s infinite alternate-reverse linear;
     }
     #estatisticas{
         position: absolute;
@@ -62,6 +65,103 @@
         padding: 5px;
         pointer-events: none;
     }
+    button{
+        margin: 10px;
+        cursor: pointer;
+        background-image: linear-gradient(138deg, rgba(0,138,255,1) 0%,rgba(0,138,255,1) 49%, rgba(255,255,255,1) 50%,rgba(0,138,255,1) 51%, rgba(0,138,255,1) 100%);
+        background-size: 600% 600%;
+        color: unset;
+        border: 4px groove var(--color1);
+        padding: 15px;
+    }
+    button:hover{
+        animation: brilho 2s linear infinite;
+        
+    }
+    button:focus{
+        filter: brightness(0.5);
+    }
+    #formScore{
+        font-size: 1.5rem;
+        position: absolute;
+        background-color: var(--color5);
+        padding: 100px;
+        box-shadow: 0 0 100px 25px black;
+        border: 15px groove var(--color3);
+        border-radius: 15px;
+        width: unset;
+        height: unset;
+        max-width: 75%;
+        max-height: 75%;
+        margin-top: unset;
+        transform: none;
+    }
+    #formScore>div{
+        background: unset;
+        padding: unset;
+        padding-top: unset;
+        border-radius: unset;
+        margin-bottom: unset;
+        border: unset;
+        box-shadow: unset;
+    }
+    th, td, table{
+        background-color: var(--color5);
+        padding: 5px;
+        border: 5px groove white;
+        border-collapse: collapse;
+    }
+    thead{
+        background-color: var(--color2);
+    }
+    #leaderBoard tbody tr:first-child{
+        color: yellow;
+    }
+    #leaderBoard tbody tr:first-child~tr{
+        color: rgb(216, 216, 216);
+    }
+    #leaderBoard tbody tr:first-child~tr~tr{
+        color: rgb(255, 102, 0);
+    }
+    #leaderBoard tbody tr:first-child~tr~tr~tr{
+        color: unset;
+    }
+    #leaderBoard{
+        background-color: var(--color5);
+        position: absolute;
+        box-shadow: 0 0 100px 25px black;
+        padding: 30px;
+        border-radius: 15px;
+    }
+    #leaderBoard>span, #formScore>span{
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        font-weight: 900;
+        padding: 5px;
+        font-size: 1.25em;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    @keyframes brilho{
+        0%{
+            background-position: 100%;
+        }
+        50%{
+            background-position: 0%;
+        }
+        100%{
+            background-position: 0%;
+        }
+    }
+    @keyframes inverte{
+        0%{
+            filter: invert(0);
+        }
+        100%{
+            filter: invert(1);
+        }
+    }
 </style>
 <div id="msg" class="naoselecionavel">
     <p>Error: 404</p>
@@ -77,13 +177,40 @@
     <form action="" method="post"></form>
 </div>
 <div id="parabens" class="invisivel naoselecionavel">
-    {{!-- <button>LeaderBoard</button>
-    <button>Cadastrar Score</button>
-    <br> --}}
+    <button onclick="App.leaderboard()">LeaderBoard</button>
+    <button onclick="App.cadastrarScore()">Cadastrar Score</button>
+    <br>
     <img src="/assets/imgs/manoel_feliz.jpeg" alt="Manoel Gomes feliz">
     <h1>Parabéns você pegou <span></span> canetas</h1>
     <p>pegue essa caneta para recomeçar o jogo: </p>
-
+</div>
+<form action="" method="post" class="invisivel formulario" id="formScore">
+    <span onclick="App.sairscore()">X</span>
+    <div>
+        <div>
+            <input type="text" name="nome" required maxlength="5", minlength="5" class="input_user" oninput="App.normalize()" id="nome_input">
+            <p class="label_input_user">UserName (5 caracteres): </p>
+        </div>
+    </div>
+    <br>
+    <input type="submit" value="Enviar">
+    <input type="text" name="score" hidden>
+    <input type="text" name="tipo" hidden>
+</form>
+<div class="invisivel" id="leaderBoard">
+    <span onclick="App.sairleader()">X</span>
+    <table>
+        <thead>
+            <tr>
+                <th>Classifição</th>
+                <th>Nome</th>
+                <th>Pontos</th>
+                <th>precisao</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </div>
 <h1 id="tempo" class="invisivel naoselecionavel"></h1>
 <i class="bi bi-pen-fill naoselecionavel" id="pen" onclick="App.pegar()"></i>
@@ -96,6 +223,10 @@
         const tempo = document.getElementById('tempo')
         const parabens = document.getElementById('parabens')
         const conta = document.getElementById('count')
+        const formScore = document.getElementById('formScore')
+        const body = document.querySelector('body')
+        const leaderBoard = document.getElementById('leaderBoard')
+        let podendo = true
         var pontos = 0
         var recorde = 0
         var restante = 30
@@ -111,6 +242,9 @@
                 if(!parabens.classList.contains("invisivel")){
                     parabens.classList.add("invisivel")
                 }
+                podendo=true
+                pontos=0
+                clicks = 0
                 tempo.innerText=restante
                 restante=30
                 msg.style.display='none'
@@ -121,14 +255,12 @@
                 var intervalo = setInterval(()=>{
                     restante-=1
                     tempo.innerText=restante
-                    if(restante==0){
+                    if(restante<=0){
                         pen.classList.remove('playing')
                         pen.style.position="unset"
                         pen.style.color="unset"
                         parabens.classList.remove("invisivel")
                         parabens.querySelector("span").innerText=pontos
-                        pontos=0
-                        clicks = 0
                         clearInterval(intervalo)
                     }
                 },1000)
@@ -147,6 +279,81 @@
                 pen.style.left=Math.floor(Math.random() * (80 - 10) + 10)+"%"
             }
             pen.style.color="rgb("+Math.floor(Math.random() * 256)+","+Math.floor(Math.random() * 256)+",0)"
+        }
+        App.cadastrarScore = function(){
+            if(podendo){
+                formScore.classList.remove("invisivel")
+            }
+        }
+        App.normalize = function(){
+            formScore.querySelector("#nome_input").value=normalizar(formScore.querySelector("#nome_input").value.toUpperCase())
+            
+        }
+        App.leaderboard = ()=>{
+            //leaderBoard.classList.remove('invisivel')
+            fetch('/leaderboard', {
+                method: 'Post',
+                headers: {
+                    'content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    celular: isMobileDevice()
+                })
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json()
+            })
+            .then(data => {
+                console.log(data); // Manipula os dados JSON recebidos do servidor
+                leaderBoard.classList.remove("invisivel")
+                
+                leaderBoard.querySelector("tbody").innerHTML=""
+                data.record.forEach((element, index)=>{
+                    leaderBoard.querySelector("tbody").insertAdjacentHTML('beforeEnd','<tr><td>'+(index+1)+'.</td><td>'+element.nome+'</td><td>'+element.pontos+'</td><td>'+element.precisao+'%</td></tr>')
+                })
+            })
+            .catch(error => {
+                console.error('Houve um problema com a requisição:', error);
+            });
+        }
+        App.sairleader = ()=>{
+            leaderBoard.classList.add('invisivel')
+        }
+        App.sairscore = ()=>{
+            formScore.classList.add("invisivel")
+        }
+        formScore.onsubmit = (event)=>{
+            event.preventDefault()
+            formScore.querySelector("#nome_input").value=normalizar(formScore.querySelector("#nome_input").value.toUpperCase())
+            formScore.querySelector("input[type=submit]").style.color = "red"
+            while (formScore.querySelector("#nome_input").value<5){
+                formScore.querySelector("#nome_input").value+="_"
+            }
+            fetch('/cadatroScore', {
+                method: 'Post',
+                headers: {
+                    'content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nome: formScore.querySelector("#nome_input").value,
+                    pontos: pontos,
+                    precisao: (pontos/clicks*100).toFixed(2),
+                    celular: isMobileDevice()
+                })
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+                }
+                formScore.classList.add("invisivel")
+                podendo=false
+            })
+            .catch(error => {
+                console.error('Houve um problema com a requisição:', error);
+            });
         }
     })()
 </script>
