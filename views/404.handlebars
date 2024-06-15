@@ -213,7 +213,7 @@
     </table>
 </div>
 <h1 id="tempo" class="invisivel naoselecionavel"></h1>
-<i class="bi bi-pen-fill naoselecionavel" id="pen" onclick="App.pegar()"></i>
+<i class="bi bi-pen-fill naoselecionavel" id="pen" onmousedown="App.pegar()"></i>
 <script>
     let App = {};
     (function(){
@@ -235,7 +235,7 @@
         
         
         
-        document.addEventListener('click',()=>{
+        document.addEventListener('mousedown',()=>{
             if(pen.classList.contains("playing")){
                 clicks+=1
                 conta.innerHTML=(pontos/clicks*100).toFixed(2)
