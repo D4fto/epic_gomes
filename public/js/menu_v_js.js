@@ -46,6 +46,7 @@ const preco_slider = document.getElementById("preco")
         }
         
     }
+    
     preco_slider_custom()
     filtro_collapsable_chec()
     filtros_chec()

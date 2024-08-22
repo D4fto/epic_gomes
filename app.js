@@ -17,7 +17,8 @@ require("./config/auth")(passport)
 const { authenticated } = require("./helpers/authenticated");
 const { normalizar } = require("./helpers/normalizar");
 const Jogo = require('./models/Jogo');
-const Erro_404 = require('./models/Erro_404')
+const Erro_404 = require('./models/Erro_404');
+const { STRING } = require('sequelize');
 var emailtemp
 const SECRET_KEY = process.env.SECRET_KEY;
 const SESSION_SECRET = process.env.SESSION_SECRET;
@@ -76,11 +77,16 @@ const helpers = {
             return '<p class="preco_atual">'+price2.toFixed(2)+'</p>'
         }
     },
-    gerarFiltros: function(filtros, tipo, tipo_nome){
+    gerarFiltros: function(filtros, tipo, tipo_nome, ativos){
         filtroshtml=''
         filtros.forEach(element => {
             if (element.filtro_tipo_id_filtro_tipo == tipo){
+                // if(ativos.includes(element.id_filtro+'')){
+                    
+                // }
                 filtroshtml+='<label for="'+tipo_nome+element.id_filtro+'" ><li><div class="checkbox naoselecionavel"><input class="'+tipo_nome+'_filtro filtro" type="checkbox" name="filtro'+element.id_filtro+'" id="'+tipo_nome+element.id_filtro+'"><label for="'+tipo_nome+element.id_filtro+'">'+element.nome+'</label></div></li></label>'
+
+
             }
         });
         return filtroshtml
@@ -149,6 +155,8 @@ const upload = multer({storage});
             res.render('home',{
                 jogos: jogos2,
                 filtros: filtrosm,
+                ativos: filtrosSelect,
+                preco: requisicoes.preco,
                 filtrosTipos: filtersTypes,
                 has_v:true,
                 menu_horizontal: [{nome: 'Home', rota: '/home', ativo: true},{nome: 'Carrinho', rota: '/carrinho', ativo: false},{nome: 'Biblioteca', rota: '/biblioteca', ativo: false}]

@@ -2,7 +2,7 @@
 <input type="checkbox" id="menu_v_chec" class="invisivel">
 <div id="fundo_menu"></div>
 <label for="menu_v_chec" id="menu_v_label"><i class="bi bi-list"></i></label>
-<form action="/home" method="get">
+<form action="/home" method="get" id="receba">
 <ul class="menu menu_v">
     
     <li>
@@ -17,7 +17,11 @@
         <div class="filtro_container" id="price_container">
             <div class="caixa_filtros">
                 <ul>
+                    {{#if preco}}
+                    <li class="preco" style="order: -2;"><div class="range_preco"><form><input class="naoselecionavel" type="range" name="preco" id="preco" min="0" max="130" step="10"oninput="x.value=preco.value" value="{{preco}}"><br><p id="preco_output">Por até <output name="x" for="preco" value="{{preco}}">{{preco}}</output>,00 R$</p><p id="qualquer">Qualquer preço</p><p id="gratis">Gratuito</p></form></div></li>
+                    {{else}}
                     <li class="preco" style="order: -2;"><div class="range_preco"><form><input class="naoselecionavel" type="range" name="preco" id="preco" min="0" max="130" step="10"oninput="x.value=preco.value" value="130"><br><p id="preco_output">Por até <output name="x" for="preco"></output>,00 R$</p><p id="qualquer">Qualquer preço</p><p id="gratis">Gratuito</p></form></div></li>
+                    {{/if}}
                     <label for="specials"><li><div class="checkbox naoselecionavel"><input class="price_filtro filtro" type="checkbox" name="spc_offer" id="specials"><label for="specials">Ofertas especiais</label></div></li></label>
                     <label for="hidef2p"><li><div class="checkbox naoselecionavel"><input class="price_filtro filtro" type="checkbox" name="hidef2p" id="hidef2p"><label for="hidef2p">Ocultar gratuitos</label></div></li></label>
                 </ul>
@@ -32,7 +36,7 @@
         <div class="filtro_container" id="{{tipo_nome}}_container" style="grid-template-rows: 1fr;">
             <div class="caixa_filtros">
                 <ul>
-                    {{{gerarFiltros ../filtros id_filtro_tipo tipo_nome}}}
+                    {{{gerarFiltros ../filtros id_filtro_tipo tipo_nome ../ativos}}}
                 </ul>
             </div>
         </div>
