@@ -347,15 +347,13 @@
                     precisao: (pontos/clicks*100).toFixed(2),
                     celular: isMobileDevice()
                 })
-            })
-            .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
                 }
                 formScore.classList.add("invisivel")
                 podendo=false
-            })
-            .catch(error => {
+            }).catch(error => {
                 console.error('Houve um problema com a requisição:', error);
             });
         }
